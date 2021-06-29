@@ -3,4 +3,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template("PassGen.html")
+    return render_template("PassGen.html", message="PassGen coming soon..............")
