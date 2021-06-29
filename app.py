@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "PassGen to come soon...."
+    return render_template("PassGen.html")
