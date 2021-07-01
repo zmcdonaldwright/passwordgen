@@ -2,14 +2,21 @@
 <html lang="en">
 <head> 
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/static/style.css">
-  <title>PassGen</title>
+  <link rel="stylesheet" href="style.css">
+  <title>PassGEN</title>
 </head> 
 <body> 
-  <h1>PassGen</h1>
+<div>
+<div class="header"> 
+  <h1>PassGEN</h1>
+  <p>Generate a secure password</p>
+</div>
+<div class="password_box">
+  <p>A password will be here</p>
+</div>
   <p> 
-    {{message}}
-    <button>Button</button>
+    <button onClick="window.location.reload();">Generate</button>
   </p>
+</div>
 </body>
 </html>
