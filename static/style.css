@@ -1,6 +1,15 @@
-body { 
+body {
+	background-color: #f1f1f1;
+}
+
+div { 
     font-family: sans-serif;
-    color: cornflowerblue;
+	text-align: center;
+	vertical-align: center;
+	margin-top: 0px;
+	margin: auto;
+	width: 75%;
+    /*color: cornflowerblue;*/
 }
 
 button {
@@ -12,4 +21,26 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+button:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.header {
+  padding: 30px;
+  text-align: center;
+  font-size: 30px;
+  line-height:15px;
+}
+
+.password_box { 
+  background-color: white;
+  color: gray; 
+  font-size: 30px;
+  border-radius: 12px;
+  padding: 1px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
