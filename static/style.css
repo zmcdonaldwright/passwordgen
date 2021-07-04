@@ -1,15 +1,6 @@
 body {
-	background-color: #f1f1f1;
-}
-
-div { 
-    font-family: sans-serif;
-	text-align: center;
-	vertical-align: center;
-	margin-top: 0px;
-	margin: auto;
-	width: 75%;
-    /*color: cornflowerblue;*/
+  background-color: #f1f1f1;
+  margin: auto;
 }
 
 button {
@@ -23,10 +14,23 @@ button {
   font-size: 16px;
   border-radius: 12px;
   cursor: pointer;
+  margin-top: 15px
 }
 
-button:hover {
-	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+input { 
+  width: 75%;
+  border: none;
+  padding: 20px 0px;
+  font-size: 30px;
+  text-align: center;
+  color: dimgray;
+  border-radius: 12px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+input:focus { 
+	outline: none;
 }
 
 .header {
@@ -34,13 +38,53 @@ button:hover {
   text-align: center;
   font-size: 30px;
   line-height:15px;
+  font-family: sans-serif;
+  margin: auto;
 }
 
-.password_box { 
-  background-color: white;
-  color: gray; 
-  font-size: 30px;
-  border-radius: 12px;
-  padding: 1px;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+.tooltip {
+  position: relative;
+  display: inline-block;
 }
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.body {
+	font-family: sans-serif;
+	text-align: center;
+	vertical-align: center;
+	margin-top: 0px;
+	margin: auto;
+	width: 75%;
+} 
