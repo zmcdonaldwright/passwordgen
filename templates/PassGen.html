@@ -11,7 +11,11 @@
 </div>
 <body>
 	<div class="body">
-		<input type="text" value={{message}} id="passwordBox"> <br>
+		<input type="text" value="A password will be here" id="passwordBox">
+		<div class="password-meter-wrap">
+			<div class="password-meter-bar"></div>
+		</div>
+		<br>
 		<button onClick="window.location.reload();">Generate</button>
 		<div class="tooltip">
 			<button onclick="myFunction()" onmouseout="outFunc()"> <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy text</button>
@@ -33,6 +37,40 @@
 		  tooltip.innerHTML = "Copy to clipboard";
 		}
 		</script>
+		<script type="text/javascript" src="zxcvbn.js"></script>
+		<script> 
+		'use strict';
+
+		class PasswordMeter {
+			constructor(selector) {
+				this.wrappers = document.querySelectorAll(selector);
+				if(this.wrappers.length > 0) {
+					this.init(this.wrappers);
+				}
+			}
+			init(wrappers) {
+				wrappers.forEach(wrapper => {
+					let bar = wrapper.querySelector('.password-meter-bar');
+					let input = wrapper.previousElementSibling;
+
+					myFunct(bar, input);
+					input.addEventListener('keyup', function() {myFunct(bar, input);}, false);
+				});
+			}
+		}
+		
+		function myFunct(bar, input) {
+			let value = input.value;
+			bar.classList.remove('level0', 'level1', 'level2', 'level3', 'level4');
+			let result = zxcvbn(value);
+			let cls = `level${result.score}`;
+			bar.classList.add(cls);
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			const passwordMeter = new PasswordMeter('.password-meter-wrap');
+		}, false);
+	</script>
 	</div>
 </body>
 </html>
