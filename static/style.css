@@ -118,11 +118,11 @@ input:focus {
 }
 .password-meter-bar.level2 {
     width: 60%;
-    background-color: #ff0;
+    background-color: #FFCD01;
 }
 .password-meter-bar.level3 {
     width: 80%;
-    background-color: rgb(161, 168, 65);
+    background-color: #9ACD32;
 }
 
 .password-meter-bar.level4 {
