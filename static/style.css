@@ -25,7 +25,8 @@ input {
   width: 75%;
   border: none;
   padding: 20px 0px;
-  font-size: 30px;
+  font-size: 35px;
+  font-family: monospace;
   text-align: center;
   color: dimgray;
   border-radius: 12px;
@@ -34,6 +35,13 @@ input {
 
 input:focus { 
 	outline: none;
+}
+
+label {
+	color: #E1E1E1;
+	display: inline-block;
+	z-index: 5;
+	position: absolute;
 }
 
 .header {
@@ -59,7 +67,7 @@ input:focus {
   border-radius: 6px;
   padding: 5px;
   position: absolute;
-  z-index: 1;
+  z-index: 10;
   bottom: 150%;
   left: 50%;
   margin-left: -75px;
