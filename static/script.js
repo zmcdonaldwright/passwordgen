@@ -27,6 +27,11 @@ function passwordMeterDisplay(bar, input) {
 	let result = zxcvbn(value);
 	let cls = `level${result.score}`;
 	bar.classList.add(cls);
+	
+	var strengthLabel = document.getElementById("passStrengthBits");
+	let guesses = result.guesses; //Get the number of guesses required to get the password. Entropy in bits is log2(guesses)
+	let entropy = Math.log2(guesses * 2)
+	strengthLabel.innerHTML = Math.floor(entropy) + " Bits";
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,6 +57,23 @@ function outFunc() {
 
 //----------Password Generation----------
 function passwordGenerator() {
+	let lowercase = "abcdefghijklmnopqrstuvwxyz";
+	let uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	let numbers = "0123456789"
+	let symbolsStandard = "!@#$%^&*()-=_+<>?;:"
+	
+	let result = "";
+	let charSet = lowercase + uppercase + numbers;
+	let charSetLength = charSet.length;
+	
+	for (var i = 0; i < 12; i++) {
+		result += charSet[Math.floor(Math.random() * charSetLength)];
+	}
+	
+	var passwordInput = document.getElementById("passwordBox");
+	passwordInput.value = result;
+	outFunc();
+	/*
 	let firstArray = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Purple", "Pink", "Silver", "Gold", "Grey", "Black", "White"];
 	let secondArray = ["Wolf", "Tiger", "Lion", "Bear", "Elephant", "Hippo", "Panther", "Whale", "Snake", "Crocodile", "Eagle", "Panda", "Squirrel"]
 	
@@ -61,4 +83,5 @@ function passwordGenerator() {
 	var passwordInput = document.getElementById("passwordBox");
 	passwordInput.value = firstElement + secondElement + Math.floor(Math.random()*10) + Math.floor(Math.random()*10);
 	outFunc();
+	*/
 }
