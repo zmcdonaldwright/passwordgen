@@ -11,15 +11,18 @@
 </div>
 <body>
 	<div class="body">
-		<input type="text" value="" id="passwordBox">
+		<input type="text" value="" id="passwordBox" class="passwordInput">
 		<div class="password-meter-wrap">
 			<label id="passStrengthBits"></label>
 			<div class="password-meter-bar"></div>
 		</div>
 		<br>
-		<button onClick="passwordGenerator()" id="generateButton">Generate</button>
-		<div class="tooltip">
-			<button onclick="clipboardCopy()"> <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy text</button>
+		
+		<div class="buttons">
+			<button onClick="passwordGenerator()" id="generateButton">Generate</button>
+			<div class="tooltip">
+				<button onclick="clipboardCopy()"> <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy text</button>
+			</div>
 		</div>
 		
 		<div class="customization">
