@@ -1,4 +1,11 @@
 'use strict';
+
+//----------Length Slider----------
+var slider = document.getElementById("passLengthSlider");
+var output = document.getElementById("passLengthInput");
+output.value = slider.value; // Display the default slider value
+
+
 //----------Password bar----------
 class PasswordMeter {
 	constructor(selector) {
@@ -66,7 +73,7 @@ function passwordGenerator() {
 	let charSet = lowercase + uppercase + numbers;
 	let charSetLength = charSet.length;
 	
-	for (var i = 0; i < 12; i++) {
+	for (var i = 0; i < slider.value; i++) {
 		result += charSet[Math.floor(Math.random() * charSetLength)];
 	}
 	
@@ -84,4 +91,32 @@ function passwordGenerator() {
 	passwordInput.value = firstElement + secondElement + Math.floor(Math.random()*10) + Math.floor(Math.random()*10);
 	outFunc();
 	*/
+}
+
+//----------Length Slider----------
+
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+	output.value = this.value;
+	passwordGenerator()
+}
+
+output.addEventListener("keyup", function(event) {
+	// Number 13 is the "Enter" key of the keyboard
+	if (event.keyCode == 13) {
+		event.preventDefault();
+		inputFinished();
+	}
+});
+//Update the position of the slider based on the input
+function inputFinished() {
+	//Quick logic to make sure the input is valid
+	if (output.value > 50) {
+		output.value = 50;
+	} else if (output.value < 1) {
+		output.value = 1;
+	}
+	slider.value = output.value;
+	passwordGenerator()
 }
