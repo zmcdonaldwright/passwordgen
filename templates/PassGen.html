@@ -21,6 +21,15 @@
 		<div class="tooltip">
 			<button onclick="clipboardCopy()"> <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy text</button>
 		</div>
+		
+		<div class="customization">
+			<h2>Customize Password</h2>
+			<div class="slidecontainer">
+				<p>Password Length:
+				<input type="number" class="passlengthinput" id="passLengthInput" onfocusout="inputFinished()">    <input type="range" min="1" max="50" value="12" class="slider" id="passLengthSlider">
+				</p>
+			</div>
+		</div>
 
 		<script type="text/javascript" src="/static/zxcvbn.js"></script>
 		<script type="text/javascript" src="/static/script.js"></script>
