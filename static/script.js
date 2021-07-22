@@ -3,47 +3,49 @@
 //----------Length Slider----------
 var slider = document.getElementById("passLengthSlider");
 var output = document.getElementById("passLengthInput");
-output.value = slider.value; // Display the default slider value
-
 
 //----------Password bar----------
-class PasswordMeter {
-	constructor(selector) {
-		this.wrappers = document.querySelectorAll(selector);
-		if(this.wrappers.length > 0) {
-			this.init(this.wrappers);
+var bar = document.querySelector('.password-meter-bar');
+var input = document.getElementById("passwordBox");
+var genButton = document.getElementById("generateButton");
+initialize();
+function initialize() {
+	output.value = slider.value; // Display the default slider value
+	passwordGenerator();
+	input.addEventListener('keyup', function() {passwordMeterDisplay();}, false);
+	input.addEventListener('keyup', function() {output.value = input.value.length; slider.value = output.value;}, false);
+	genButton.addEventListener('click', function() {passwordMeterDisplay();}, false);
+	
+	// Update the current slider value (each time you drag the slider handle)
+	slider.oninput = function() {
+		output.value = this.value;
+		passwordGenerator();
+		
+	}
+	
+	output.addEventListener("keyup", function(event) {
+		// Number 13 is the "Enter" key of the keyboard
+		if (event.keyCode == 13) {
+			event.preventDefault();
+			inputFinished();
 		}
-	}
-	init(wrappers) {
-		wrappers.forEach(wrapper => {
-			let bar = wrapper.querySelector('.password-meter-bar');
-			let input = wrapper.previousElementSibling;
-			let genButton = document.getElementById("generateButton");
-			
-			passwordGenerator()
-			passwordMeterDisplay(bar, input);
-			input.addEventListener('keyup', function() {passwordMeterDisplay(bar, input);}, false);
-			genButton.addEventListener('click', function() {passwordMeterDisplay(bar, input);}, false);
-		});
-	}
+	});
 }
 
-function passwordMeterDisplay(bar, input) {
+function passwordMeterDisplay() {
+	//Change the colour of the bar based on the password inputted
 	let value = input.value;
 	bar.classList.remove('level0', 'level1', 'level2', 'level3', 'level4');
 	let result = zxcvbn(value);
 	let cls = `level${result.score}`;
 	bar.classList.add(cls);
 	
+	//Change the strength indicator of the password based on the input
 	var strengthLabel = document.getElementById("passStrengthBits");
 	let guesses = result.guesses; //Get the number of guesses required to get the password. Entropy in bits is log2(guesses)
 	let entropy = Math.log2(guesses * 2)
 	strengthLabel.innerHTML = Math.floor(entropy) + " Bits";
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-	const passwordMeter = new PasswordMeter('.password-meter-wrap');
-}, false);
 
 
 //----------Copy to Clipboard tooltip----------
@@ -77,38 +79,12 @@ function passwordGenerator() {
 		result += charSet[Math.floor(Math.random() * charSetLength)];
 	}
 	
-	var passwordInput = document.getElementById("passwordBox");
-	passwordInput.value = result;
+	input.value = result;
+	passwordMeterDisplay();
 	outFunc();
-	/*
-	let firstArray = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Purple", "Pink", "Silver", "Gold", "Grey", "Black", "White"];
-	let secondArray = ["Wolf", "Tiger", "Lion", "Bear", "Elephant", "Hippo", "Panther", "Whale", "Snake", "Crocodile", "Eagle", "Panda", "Squirrel"]
-	
-	let firstElement = firstArray[Math.floor(Math.random()*firstArray.length)];
-	let secondElement = secondArray[Math.floor(Math.random()*secondArray.length)];
-	
-	var passwordInput = document.getElementById("passwordBox");
-	passwordInput.value = firstElement + secondElement + Math.floor(Math.random()*10) + Math.floor(Math.random()*10);
-	outFunc();
-	*/
 }
 
 //----------Length Slider----------
-
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-	output.value = this.value;
-	passwordGenerator()
-}
-
-output.addEventListener("keyup", function(event) {
-	// Number 13 is the "Enter" key of the keyboard
-	if (event.keyCode == 13) {
-		event.preventDefault();
-		inputFinished();
-	}
-});
 //Update the position of the slider based on the input
 function inputFinished() {
 	//Quick logic to make sure the input is valid
