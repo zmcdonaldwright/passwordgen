@@ -1,5 +1,21 @@
 'use strict';
 
+//----------Password Customization----------
+var characterSets = {
+	"lowercase": "abcdefghijklmnopqrstuvwxyz", 
+	"uppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+	"numbers": "0123456789",
+	"symbols": "!@#$%^&*()-=_+<>?;:"
+};
+
+//console.log(Object.keys(characterSets).length)
+
+var checkboxes = [];
+for (var characterSet in characterSets) {
+	checkboxes.push(document.getElementById(characterSet));
+}
+//console.log(checkboxes);
+
 //----------Length Slider----------
 var slider = document.getElementById("passLengthSlider");
 var output = document.getElementById("passLengthInput");
@@ -43,7 +59,7 @@ function passwordMeterDisplay() {
 	//Change the strength indicator of the password based on the input
 	var strengthLabel = document.getElementById("passStrengthBits");
 	let guesses = result.guesses; //Get the number of guesses required to get the password. Entropy in bits is log2(guesses)
-	let entropy = Math.log2(guesses * 2)
+	let entropy = Math.log2(guesses * 2);
 	strengthLabel.innerHTML = Math.floor(entropy) + " Bits";
 }
 
@@ -65,14 +81,37 @@ function outFunc() {
 }
 
 //----------Password Generation----------
-function passwordGenerator() {
-	let lowercase = "abcdefghijklmnopqrstuvwxyz";
+function passwordGenerator(lastChecked = "lowercase") {
+	/* let lowercase = "abcdefghijklmnopqrstuvwxyz";
 	let uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	let numbers = "0123456789"
-	let symbolsStandard = "!@#$%^&*()-=_+<>?;:"
+	let numbers = "0123456789";
+	let symbolsStandard = "!@#$%^&*()-=_+<>?;:";
+	let charSet = "";
+	
+	if (document.getElementById("lowercase").checked == true) { 
+		charSet += lowercase;
+	}
+	if (document.getElementById("uppercase").checked == true) { 
+		charSet += uppercase;
+	}
+	if (document.getElementById("numbers").checked == true) { 
+		charSet += numbers;
+	} */
+	
+	let charSet = "";
+	for (var characterSet in characterSets) {
+		if (document.getElementById(characterSet).checked == true) {
+			charSet += characterSets[characterSet];
+		}
+	}
+	
+	if (charSet.length == 0) {
+		charSet += characterSets[lastChecked];
+		document.getElementById(lastChecked).checked = true;
+	}
 	
 	let result = "";
-	let charSet = lowercase + uppercase + numbers;
+	//let charSet = lowercase + uppercase + numbers;
 	let charSetLength = charSet.length;
 	
 	for (var i = 0; i < slider.value; i++) {
@@ -94,5 +133,5 @@ function inputFinished() {
 		output.value = 1;
 	}
 	slider.value = output.value;
-	passwordGenerator()
+	passwordGenerator();
 }
