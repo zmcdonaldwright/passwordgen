@@ -31,6 +31,17 @@
 				<p>Password Length:
 				<input type="number" class="passlengthinput" id="passLengthInput" onfocusout="inputFinished()">    <input type="range" min="1" max="50" value="12" class="slider" id="passLengthSlider">
 				</p>
+				
+				<form> Character Sets: <br>
+					<input type="checkbox" id="lowercase" name="lowercase" value="lowercase" onchange="passwordGenerator('lowercase')" checked>
+					<label for="lowercase"> Lowercase Letters</label><br>
+					<input type="checkbox" id="uppercase" name="uppercase" value="uppercase" onchange="passwordGenerator('uppercase')" checked>
+					<label for="uppercase"> Uppercase Letters</label><br>
+					<input type="checkbox" id="numbers" name="numbers" value="numbers" onchange="passwordGenerator('numbers')" checked>
+					<label for="numbers"> Numbers</label><br>
+					<input type="checkbox" id="symbols" name="symbols" value="symbols" onchange="passwordGenerator('symbols')">
+					<label for="symbols"> Symbols</label><br>
+				</form>
 			</div>
 		</div>
 
