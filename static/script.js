@@ -24,7 +24,14 @@ var output = document.getElementById("passLengthInput");
 var bar = document.querySelector('.password-meter-bar');
 var input = document.getElementById("passwordBox");
 var genButton = document.getElementById("generateButton");
+
+//----------Modal Form----------
+var customizationButton = document.getElementById("customizationButton");
+var closeButton = document.getElementById("closeButton");
+var modal = document.getElementById("customization");
+
 initialize();
+
 function initialize() {
 	output.value = slider.value; // Display the default slider value
 	passwordGenerator();
@@ -46,6 +53,20 @@ function initialize() {
 			inputFinished();
 		}
 	});
+	
+	// When the user clicks the button, open the modal 
+	customizationButton.onclick = function() {
+		if (modal.style.display == "block"){
+			modal.style.display = "none";
+		} else {
+			modal.style.display = "block";
+		}
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	closeButton.onclick = function() {
+		modal.style.display = "none";
+	}
 }
 
 function passwordMeterDisplay() {
